@@ -3,6 +3,7 @@
 # bredbandskollen-prometheus-exporter
 Export Internet speed tests from Bredbandskollen to Prometheus
 
+Built for ARM 64-bit, tested on Raspberry Pi 3
 ## Exported Metrics
 
 | Metric | Description | Labels |
@@ -15,24 +16,15 @@ Export Internet speed tests from Bredbandskollen to Prometheus
 ## Docker
 
 ```
-docker pull aolde/bredbandskollen-prometheus-exporter
+docker build -t bredbandskollen-prometheus-exporter:aarch64 .
 ```
 
 ```
 docker run --rm --name bbk-exporter \
     -p 3001:80 \
-    aolde/bredbandskollen-prometheus-exporter
+    bredbandskollen-prometheus-exporter:aarch64
 ```
 
 ```
 curl http://localhost:3001/metrics
 ```
-
-## Helm
-
-```console
-helm repo add aolde https://aolde.github.com/helm
-helm install -f values.yaml bbk-exporter aolde/bredbandskollen-prometheus-exporter
-```
-
-See more info in the [helm chart](https://github.com/aolde/helm/tree/main/charts/bredbandskollen-prometheus-exporter).
